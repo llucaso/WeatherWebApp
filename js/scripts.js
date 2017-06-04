@@ -2,6 +2,9 @@ $(function() {
 
 	var url = 'http://api.openweathermap.org/data/2.5/weather?q=';
 	var temp = $('#temp');
+	var pressure = $('#pressure');
+	var weather = $("#weather-icon");
+	var iconLink = 'http://openweathermap.org/img/w/';
 
 
 
@@ -15,37 +18,34 @@ $(function() {
 		$.ajax({
 			url: url + cityName + '&mode=json&units=metric' + '&APPID=9ca0cfe713c745eb66268a80dfa1ef98',
 			method: 'GET',
-			success: function(res) {
-				temp.text(res.main.temp);
-				$('#temp').append('*C');
-			}
+			success: getWeather
+			
 		});
 
 	}
 
+	function getWeather(res) {		
+
+		temp
+			.text(res.main.temp)
+			.append(' &#8451;');
+		pressure
+			.text(res.main.pressure)
+			.append(' hPa');
+		weather
+			.attr("src","http://openweathermap.org/img/w/" + res.weather[0].icon + ".png");
+			//.text('http://openweathermap.org/img/w/' + res.weather[0].icon);
+			//.text(res.weather[0].icon);
+		
+		}
+
+
+	function showIcon() {
 
 
 
 
+	}
 	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	});
