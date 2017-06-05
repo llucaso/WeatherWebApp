@@ -5,6 +5,9 @@ $(function() {
 	var pressure = $('#pressure');
 	var weather = $("#weather-icon");
 	var iconLink = 'http://openweathermap.org/img/w/';
+	
+	$(weather)
+		.hide();
 
 
 
@@ -14,12 +17,12 @@ $(function() {
 
 	function getTemp() {
 		var cityName = $('#city-name').val();
+		if(!cityName.lenght) cityName = "Gdynia";
 
 		$.ajax({
 			url: url + cityName + '&mode=json&units=metric' + '&APPID=9ca0cfe713c745eb66268a80dfa1ef98',
 			method: 'GET',
 			success: getWeather
-			
 		});
 
 	}
@@ -34,18 +37,29 @@ $(function() {
 			.append(' hPa');
 		weather
 			.attr("src","http://openweathermap.org/img/w/" + res.weather[0].icon + ".png");
-			//.text('http://openweathermap.org/img/w/' + res.weather[0].icon);
-			//.text(res.weather[0].icon);
+
+		showImg();
+
 		
+
 		}
 
-
-	function showIcon() {
-
-
-
-
+	function showImg() {
+		$(weather)
+			.show();
 	}
-	
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	});
